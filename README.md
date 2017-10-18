@@ -4,10 +4,11 @@ The project is a [Codimension Python IDE](http://codimension.org) garbage collec
 The idea of the plugin is simple. The embedded Python garbage collector triggers objects collection at pretty
 much unknown moments and the plugin will make it more predictable. The plugin will call the
 **`collect()`** method of the Python gc module when:
-* a tab is closed
-* a project is changed
-* new files appeared in a project
-* some files are deleted from a project
+
+- a tab is closed
+- a project is changed
+- new files appeared in a project
+- some files are deleted from a project
 
 There is pretty much no user interface for the plugin. It does its work in the background.
 
