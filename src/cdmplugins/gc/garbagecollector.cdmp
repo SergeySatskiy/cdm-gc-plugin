@@ -1,6 +1,6 @@
 [Core]
 Name = Garbage collector
-Module = .
+Module = cdmplugins.gc
 
 [Documentation]
 Author = Sergey Satskiy <sergey.satskiy@gmail.com>
