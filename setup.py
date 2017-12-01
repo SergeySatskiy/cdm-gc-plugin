@@ -32,7 +32,7 @@ def getPluginVersion():
     descr = os.path.join('src', 'cdmplugins', 'gc', plugin_desc_file)
     if not os.path.exists(descr):
         print('Cannot find the plugin description file. Expected here: ' +
-              desc, file=sys.stderr)
+              descr, file=sys.stderr)
         sys.exit(1)
 
     with open(descr) as dec_file:
