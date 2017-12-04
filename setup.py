@@ -25,21 +25,22 @@ from setuptools import setup
 
 description = 'Codimension IDE garbage collector plugin'
 
-plugin_desc_file = 'src/garbagecollector.cdmp'
+plugin_desc_file = 'garbagecollector.cdmp'
 
 def getPluginVersion():
     """The version must be updated in the .cdmp file"""
-    if not os.path.exists(plugin_desc_file):
+    desc_file = os.path.join('cdmplugins', 'gc', plugin_desc_file)
+    if not os.path.exists(desc_file):
         print('Cannot find the plugin description file. Expected here: ' +
-              plugin_desc_file, file=sys.stderr)
+              desc_file, file=sys.stderr)
         sys.exit(1)
 
-    with open(plugin_desc_file) as dec_file:
+    with open(desc_file) as dec_file:
         for line in dec_file:
             line = line.strip()
             if line.startswith('Version'):
                 return line.split('=')[1].strip()
-    print('Cannot find a version line in the ' + plugin_desc_file,
+    print('Cannot find a version line in the ' + desc_file,
           file=sys.stderr)
     sys.exit(1)
 
@@ -73,6 +74,5 @@ setup(name='cdmgcplugin',
           'Operating System :: POSIX :: Linux',
           'Programming Language :: Python :: 3'],
       platforms=['any'],
-      data_files=[('/cdmplugins/gc',
-                   ['src/__init__.py', 'src/configdlg.py',
-                    plugin_desc_file])])
+      packages=['cdmplugins', 'cdmplugins.gc'],
+      package_data={'cdmplugins.gc': [plugin_desc_file]})

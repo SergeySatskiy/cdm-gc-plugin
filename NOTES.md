@@ -69,11 +69,6 @@ git push --tags
 
 ## Development
 
-The following usual link manipulation would not work because the plugin is installed as a set of data
-files but not a package. Instead a manual symbolic linking could be done: a new directory at the place where
-the plugin is installed to the src/ directory: the plugin discovery will find a new plugin.
-
-This will NOT work and provided only as a reference.
 ```shell
 # Install a develop version (create links)
 python setup.py develop
