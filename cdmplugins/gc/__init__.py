@@ -23,7 +23,7 @@
 import gc
 import logging
 import os.path
-from ui.qt import QDialog
+from ui.qt import QDialog, QTimer
 from utils.fileutils import loadJSON, saveJSON
 from plugins.categories.wizardiface import WizardInterface
 from .configdlg import GCPluginConfigDialog
@@ -198,9 +198,17 @@ class GCPlugin(WizardInterface):
                  'garbage collector plugin settings')
 
     def __collectGarbage(self, ignored=None):
-        """Collects garbage"""
+        """Initiates the delayed garbage collection"""
         del ignored     # unused argument
 
+        # The sigTabClosed is generated before the tab is actually closed but
+        # when it is for sure it will be closed. At the on closing a tab the
+        # status bar is cleared. So the GC needs to be delayed a bit so that it
+        # is not cleared right away
+        QTimer.singleShot(5, self.__delayedCollectGarbage)
+
+    def __delayedCollectGarbage(self):
+        """Collects garbage"""
         collected = []
         level0, level1, level2 = gc.get_count()
 
